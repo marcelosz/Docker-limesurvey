@@ -11,11 +11,11 @@ ENV LS_DIR /opt/limesurvey
 RUN apt-get update && apt-get install -y \
     curl \
     #postfix \
-    php7.0 \
-    php7.0-mbstring \
-    php7.0-gd \
-    php7.0-ldap \
-    php7.0-imap && \
+    php \
+    php-mbstring \
+    php-gd \
+    php-ldap \
+    php-imap && \
     apt clean
   
 RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
