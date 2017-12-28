@@ -39,7 +39,7 @@ WORKDIR /opt/limesurvey
 #ADD limesurvey.tar.bz2 /
 #RUN mv limesurvey app; \
 #	mkdir -p /uploadstruct; \
-	chown -R www-data:www-data /app
+#	chown -R www-data:www-data /app
 
 #RUN cp -r /app/upload/* /uploadstruct ; \
 #	chown -R www-data:www-data /uploadstruct
