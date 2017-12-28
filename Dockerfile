@@ -63,4 +63,4 @@ WORKDIR /opt/limesurvey
 #	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 80
-CMD ["/start.sh"]
+CMD ["nginx", "-g", "daemon off;"]
