@@ -2,9 +2,9 @@ FROM ubuntu:latest
 
 MAINTAINER marcelosz
 
-ENV LS_URI https://www.limesurvey.org/stable-release?download=2204:limesurvey300%20171222targz
-ENV LS_SHA256 c742c2471c4f89d0c62f4c1208c5eddf1f8d05ab1a17f61a0d2dce949b33912b
-ENV LS_TARBALL limesurvey3.0.0-171222.tar.gz
+ENV LS_URI https://www.limesurvey.org/stable-release?download=2209:limesurvey301%20171228targz 
+ENV LS_SHA256 cee1cccf40bd53470a68a9ddfb560599781b7eb20ed7da2feddf76e75ec2bf55 
+ENV LS_TARBALL limesurvey.tar.gz
 ENV LS_ROOT_DIR /opt
 
 RUN apt-get update && apt-get install -y \
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     apt clean
   
 #RUN curl --fail --silent --show-error --location ${LS_URI} && \
-RUN curl --fail --show-error --location ${LS_URI} --output ${LS_TARBALL} && \
+RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
     echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
     tar --extract --file ${LS_TARBALL} --directory ${LS_ROOT_DIR}
 #    && mv /opt/lime* /opt/limesurvey \
