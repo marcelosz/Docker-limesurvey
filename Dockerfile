@@ -15,30 +15,7 @@ RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
 RUN tar xzvf ${LS_TARBALL} -C ${WWW_DIR} && \
     rm -f ${LS_TARBALL}
 
-#WORKDIR ${LS_DIR}
+WORKDIR ${WWW_DIR}
+RUN chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" limesurvey
 
-#VOLUME /data
-
-#RUN rm -rf /app
-#ADD limesurvey.tar.bz2 /
-#RUN mv limesurvey app; \
-#	mkdir -p /uploadstruct; \
-#	chown -R www-data:www-data /app
-
-#RUN cp -r /app/upload/* /uploadstruct ; \
-#	chown -R www-data:www-data /uploadstruct
-
-#RUN chown www-data:www-data /var/lib/php5
-
-#ADD apache_default /etc/apache2/sites-available/000-default.conf
-#ADD start.sh /
-#ADD run.sh /
-
-#RUN chmod +x /start.sh && \
-#    chmod +x /run.sh
-
-# forward request and error logs to docker log collector
-#RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-#	&& ln -sf /dev/stderr /var/log/nginx/error.log
-
-VOLUME /var/www/html/limesurvey
+VOLUME limesurvey
