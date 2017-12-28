@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     apt clean
   
 #RUN curl --fail --silent --show-error --location ${LS_URI} && \
-RUN curl --fail --show-error --location --remote-name ${LS_URI} --output ${LS_TARBALL}
+RUN curl --fail --show-error --location --remote-name ${LS_URI} --output ${LS_TARBALL} && \
     echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
     tar --extract --file ${LS_TARBALL} --directory ${LS_ROOT_DIR}
 #    && mv /opt/lime* /opt/limesurvey \
