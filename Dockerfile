@@ -5,43 +5,19 @@ MAINTAINER marcelosz
 ENV LS_URI https://www.limesurvey.org/stable-release?download=2209:limesurvey301%20171228targz 
 ENV LS_SHA256 cee1cccf40bd53470a68a9ddfb560599781b7eb20ed7da2feddf76e75ec2bf55 
 ENV LS_TARBALL limesurvey.tar.gz
-ENV LS_PARENT_DIR /opt
-ENV LS_DIR /opt/limesurvey
+ENV WWW_DIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    curl \
-    #postfix \
-    php \
-    php-mbstring \
-    php-gd \
-    php-ldap \
-    php-imap && \
-    apt clean
+RUN apt-get update && apt-get clean
   
 RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
-    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check - && \
-    tar --extract --file ${LS_TARBALL} --directory ${LS_PARENT_DIR} && \
-    rm ${LS_TARBALL}
+    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check -
 
-WORKDIR ${LS_PARENT_DIR}
-#RUN mv lime* limesurvey && \
+RUN tar xzvf ${LS_TARBALL} -C ${WWW_DIR} && \
+    rm -f ${LS_TARBALL}
 
 #WORKDIR ${LS_DIR}
 
-#RUN mv data /data \
-#    && ln --symbolic /data
-
 #VOLUME /data
-
-#COPY docker-entrypoint.sh /docker-entrypoint.sh
-#RUN chmod 755 /docker-entrypoint.sh
-
-#EXPOSE 7474 7473 7687
-
-#ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["neo4j"]
-
-
 
 #RUN rm -rf /app
 #ADD limesurvey.tar.bz2 /
@@ -61,11 +37,8 @@ WORKDIR ${LS_PARENT_DIR}
 #RUN chmod +x /start.sh && \
 #    chmod +x /run.sh
 
-#VOLUME /app/upload
-
 # forward request and error logs to docker log collector
 #RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 #	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+VOLUME /var/www/html/limesurvey
