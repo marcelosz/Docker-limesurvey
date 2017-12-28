@@ -9,6 +9,12 @@ ENV WWW_DIR /var/www/html
 
 RUN apt-get update && apt-get clean
 
+
+#RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+#    docker-php-ext-install -j$(nproc) gd
+
+RUN docker-php-ext-install pdo pdo_mysql
+
 RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
     echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check -
 
