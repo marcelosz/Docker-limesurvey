@@ -5,7 +5,7 @@ MAINTAINER marcelosz
 ENV LS_URI https://www.limesurvey.org/stable-release?download=2209:limesurvey301%20171228targz 
 ENV LS_SHA256 cee1cccf40bd53470a68a9ddfb560599781b7eb20ed7da2feddf76e75ec2bf55 
 ENV LS_TARBALL limesurvey.tar.gz
-ENV LS_ROOT_DIR /opt
+ENV LS_PARENT_DIR /opt
 ENV LS_DIR /opt/limesurvey
 
 RUN apt-get update && apt-get install -y \
@@ -20,11 +20,11 @@ RUN apt-get update && apt-get install -y \
   
 RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
     echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
-    tar --extract --file ${LS_TARBALL} --directory ${LS_ROOT_DIR} && \
+    tar --extract --file ${LS_TARBALL} --directory ${LS_PARENT_DIR} && \
     rm ${LS_TARBALL}
 
-WORKDIR ${LS_ROOT_DIR}
-RUN mv lime* limesurvey && \
+WORKDIR ${LS_PARENT_DIR}
+#RUN mv lime* limesurvey && \
 
 #WORKDIR ${LS_DIR}
 
