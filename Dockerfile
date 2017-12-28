@@ -7,14 +7,13 @@ ENV LS_SHA256 c742c2471c4f89d0c62f4c1208c5eddf1f8d05ab1a17f61a0d2dce949b33912b
 ENV LS_TARBALL limesurvey3.0.0+171222.tar.gz
 
 RUN apt-get update && \
-	apt-get upgrade -q -y && \
-	apt-get install -q -y postfix && \  
-	apt-get install -q -y php7.0 php7.0-mbstring php7.0-gd php7.0-ldap php7.0-imap && \
-	apt-get clean && \
+    apt-get install -q -y postfix && \  
+    apt-get install -q -y php7.0 php7.0-mbstring php7.0-gd php7.0-ldap php7.0-imap && \
+    apt-get clean && \
   
-RUN curl --fail --silent --show-error --location --remote-name ${LS_URI} \
-    && echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - \
-    && tar --extract --file ${LS_TARBALL} --directory /opt
+RUN curl --fail --silent --show-error --location --remote-name ${LS_URI} && \
+    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
+    tar --extract --file ${LS_TARBALL} --directory /opt
 #    && mv /opt/lime* /opt/limesurvey \
 #    && rm ${LS_TARBALL}
 
