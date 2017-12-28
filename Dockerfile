@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y \
     php7.0-imap && \
     apt clean
   
-RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
-    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
-    tar --extract --file ${LS_TARBALL} --directory ${LS_PARENT_DIR} && \
-    rm ${LS_TARBALL}
+RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI}
+#    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check --quiet - && \
+#    tar --extract --file ${LS_TARBALL} --directory ${LS_PARENT_DIR} && \
+#    rm ${LS_TARBALL}
 
 WORKDIR ${LS_PARENT_DIR}
 #RUN mv lime* limesurvey && \
