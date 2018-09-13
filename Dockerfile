@@ -1,7 +1,8 @@
 FROM php:7.0-apache
 
-ENV LS_URI https://www.limesurvey.org/stable-release?download=2209:limesurvey301%20171228targz
-ENV LS_SHA256 cee1cccf40bd53470a68a9ddfb560599781b7eb20ed7da2feddf76e75ec2bf55
+# ENV LS_URI https://www.limesurvey.org/stable-release?download=2209:limesurvey301%20171228targz
+ENV https://www.limesurvey.org/stable-release?download=2470:limesurvey3148%20180829targz
+ENV LS_SHA256 1725a1e09890c1ff4dee7afc1703478040c0b6ad7f25a60e15e16ca05053b675
 ENV LS_TARBALL limesurvey.tar.gz
 ENV WWW_DIR /var/www/html
 
