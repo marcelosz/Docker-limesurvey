@@ -5,6 +5,7 @@ ENV LS_URI https://www.limesurvey.org/stable-release?download=2470:limesurvey314
 ENV LS_SHA256 1725a1e09890c1ff4dee7afc1703478040c0b6ad7f25a60e15e16ca05053b675
 ENV LS_TARBALL limesurvey.tar.gz
 ENV WWW_DIR /var/www/html
+ENV LS_DIR survey
 
 RUN apt-get update && apt-get install -y \
     libzip-dev \
@@ -33,9 +34,10 @@ RUN docker-php-source extract && \
 RUN docker-php-ext-install pdo pdo_mysql
 
 WORKDIR ${WWW_DIR}
-RUN chown -R www-data:www-data limesurvey
-RUN chmod -R 755 ${WWW_DIR}/limesurvey/tmp
-RUN chmod -R 755 ${WWW_DIR}/limesurvey/upload
-RUN chmod -R 755 ${WWW_DIR}/limesurvey/application/config
+RUN mv limesurvey ${LS_DIR}
+RUN chown -R www-data:www-data ${LS_DIR}
+RUN chmod -R 755 ${WWW_DIR}/${LS_DIR}/tmp
+RUN chmod -R 755 ${WWW_DIR}/${LS_DIR}/upload
+RUN chmod -R 755 ${WWW_DIR}/${LS_DIR}/application/config
 
-VOLUME ${WWW_DIR}/limesurvey
+VOLUME ${WWW_DIR}/${LS_DIR}
