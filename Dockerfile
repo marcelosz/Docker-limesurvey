@@ -1,8 +1,10 @@
-# Updated by Marcelo Souza on 2018/09/14
+# Updated by Marcelo Souza on 2019/04/30
 FROM php:7.0-apache
 
-ENV LS_URI https://www.limesurvey.org/stable-release?download=2470:limesurvey3148%20180829targz
-ENV LS_SHA256 1725a1e09890c1ff4dee7afc1703478040c0b6ad7f25a60e15e16ca05053b675
+#ENV LS_URI https://www.limesurvey.org/stable-release?download=2470:limesurvey3148%20180829targz
+ENV LS_URI=https://www.limesurvey.org/stable-release?download=2549:limesurvey3173%20190429targz
+#ENV LS_SHA256 1725a1e09890c1ff4dee7afc1703478040c0b6ad7f25a60e15e16ca05053b675
+ENV LS_SHA256 db4079a998f5824d8e52268530d4a522772ab668f418f7e8c677a3fb7d233daf
 ENV LS_TARBALL limesurvey.tar.gz
 ENV WWW_DIR /var/www/html
 ENV LS_DIR survey
