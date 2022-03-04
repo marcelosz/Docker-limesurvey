@@ -10,7 +10,8 @@ ENV LS_DIR survey
 
 RUN apt-get update && apt-get install -y \
     libzip-dev \
-    libpng-dev && \
+    libpng-dev \
+    unzip && \
     apt-get clean
 
 RUN curl --fail --show-error --location --output ${LS_ZIP} ${LS_URI} && \
