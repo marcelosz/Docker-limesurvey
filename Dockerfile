@@ -20,7 +20,7 @@ RUN curl --fail --show-error --location --output ${LS_ZIP} ${LS_URI} && \
 #RUN tar xzvf ${LS_TARBALL} -C ${WWW_DIR} && \
 #    rm -f ${LS_TARBALL}
 
-RUN unzip ${LS_ZIP} -C ${WWW_DIR} && \
+RUN unzip ${LS_ZIP} -d ${WWW_DIR} && \
     rm -f ${LS_ZIP}
 
 #RUN pecl install zip
