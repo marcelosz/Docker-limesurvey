@@ -1,11 +1,10 @@
-# Updated by Marcelo Souza on 2019/04/30
-FROM php:7.0-apache
+# Updated by Marcelo Souza on 2022/03/03
+FROM php:8.1-apache
 
-#ENV LS_URI https://www.limesurvey.org/stable-release?download=2470:limesurvey3148%20180829targz
-ENV LS_URI=https://www.limesurvey.org/stable-release?download=2549:limesurvey3173%20190429targz
-#ENV LS_SHA256 1725a1e09890c1ff4dee7afc1703478040c0b6ad7f25a60e15e16ca05053b675
-ENV LS_SHA256 db4079a998f5824d8e52268530d4a522772ab668f418f7e8c677a3fb7d233daf
-ENV LS_TARBALL limesurvey.tar.gz
+#ENV LS_URI=https://www.limesurvey.org/stable-release?download=2549:limesurvey3173%20190429targz
+ENV LS_URI https://download.limesurvey.org/latest-stable-release/limesurvey5.3.2+220302.zip
+ENV LS_SHA256 f9059c21ab25899348d195110c5c954879067fac58d7e2da4c745bde107b2913
+ENV LS_ZIP limesurvey.zip
 ENV WWW_DIR /var/www/html
 ENV LS_DIR survey
 
@@ -14,11 +13,14 @@ RUN apt-get update && apt-get install -y \
     libpng-dev && \
     apt-get clean
 
-RUN curl --fail --show-error --location --output ${LS_TARBALL} ${LS_URI} && \
-    echo "${LS_SHA256} ${LS_TARBALL}" | sha256sum --check -
+RUN curl --fail --show-error --location --output ${LS_ZIP} ${LS_URI} && \
+    echo "${LS_SHA256} ${LS_ZIP}" | sha256sum --check -
 
-RUN tar xzvf ${LS_TARBALL} -C ${WWW_DIR} && \
-    rm -f ${LS_TARBALL}
+#RUN tar xzvf ${LS_TARBALL} -C ${WWW_DIR} && \
+#    rm -f ${LS_TARBALL}
+
+RUN unzip ${LS_ZIP} -C ${WWW_DIR} && \
+    rm -f ${LS_ZIP}
 
 #RUN pecl install zip
 
